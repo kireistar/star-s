@@ -282,8 +282,8 @@ function Footer({ isDark, scrollToSection }: FooterProps) {
   ];
 
   const socialLinks = [
-    { icon: Github, href: "https://github.com/littlestar0100", label: "GitHub" },
-    { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
+    { icon: Github, href: "https://github.com/kireistar", label: "GitHub" },
+    { icon: Linkedin, href: "https://linkedin.com/", label: "LinkedIn" },
     { icon: Mail, href: "mailto:hello@bintang.ai", label: "Email" },
   ];
 
@@ -315,7 +315,7 @@ function Footer({ isDark, scrollToSection }: FooterProps) {
               Bintang AI
               <ArrowUp size={16} className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity" />
             </motion.button>
-            <p className={`${isDark ? "text-gray-400" : "text-gray-600"} mb-6 font-light max-w-md text-sm leading-relaxed`}>
+            <p className={`${isDark ? "text-gray-400" : "text-gray-600"} mb-6 font-light max-w-lg text-sm leading-relaxed`}>
               Building the future with <span className="highlight">Artificial Intelligence</span>. Passionate about
               creating intelligent systems that matter for Indonesia and beyond.
             </p>
@@ -630,7 +630,7 @@ function App() {
               </motion.div>
             </motion.div>
 
-            <motion.div className="flex flex-col sm:flex-row gap-4 justify-center mb-12" variants={itemVariants}>
+            <motion.div className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-12" variants={itemVariants}>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-full text-lg font-medium glow transition-all duration-300 group flex items-center">
                   <Download className="mr-2" size={18} />
@@ -1065,14 +1065,14 @@ function App() {
                       />
                     </motion.div>
                     <motion.div
-                      className="text-center"
+                      className="flex items-center justify-center"
                       initial={{ opacity: 0, y: 15 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: 0.5 }}
                       viewport={{ once: true }}
                     >
                       <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-full text-lg font-medium glow transition-all duration-300 group flex items-center justify-center">
+                        <Button className="bg-gradient-to-r self-center from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-full text-lg font-medium glow transition-all duration-300 group flex items-center justify-center">
                           <Zap className="mr-2" size={18} />
                           Send Message
                         </Button>
