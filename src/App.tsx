@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { motion, useScroll, useTransform, AnimatePresence, type Variants } from "framer-motion"
 import {
   Menu,
@@ -33,6 +33,10 @@ import {
   Lightbulb,
   Send,
   Star,
+  CheckCircle,
+  Loader2,
+  AlertCircle,
+  StarHalf,
 } from "lucide-react"
 
 // --- UI COMPONENT STUBS ---
@@ -112,7 +116,7 @@ function Navbar({ isDark, toggleTheme, scrollToSection, isMenuOpen, setIsMenuOpe
               onClick={() => scrollToSection("home")}
             >
               <Star className="mr-2" size={18} />
-              <span className="hidden sm:block mr-10">Bintang</span>
+              <span className="hidden sm:block mr-2.5">Star's Profile</span>
               <span className="sm:hidden">Star</span>
               {/* <BracesIcon className="mr-5" size={18} /> */}
             </motion.div>
@@ -312,7 +316,7 @@ function Footer({ isDark, scrollToSection }: FooterProps) {
               whileHover={{ scale: 1.05 }}
               aria-label="Back to Top"
             >
-              <Brain className="mr-2 group-hover:rotate-6 transition-transform" size={24} />
+              <StarHalf className="mr-2 group-hover:rotate-6 transition-transform" size={24} />
               Bintang
               <ArrowUp size={16} className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity" />
             </motion.button>
@@ -437,6 +441,65 @@ function App() {
   const { isDark, toggleTheme } = useTheme();
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+
+  // --- WEB3FORMS lOGIC ---
+
+  // This state will hold the message for the user
+  const [formResult, setFormResult] = useState("");
+
+  const [isSubmitting, setIsSubmitting] = useState(false); // State to track if the form is being submitted
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // Sending insturctions to the user
+  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setFormResult("Sending your message...");
+    setIsSubmitting(true); // Set submitting state to true
+    const formData = new FormData(event.currentTarget);
+
+    formData.append("access_key", "21a2fca1-e3b2-40d1-b6e1-243a5a9405cb");
+
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: json,
+      });
+
+      // Log the full response for debugging
+      console.log("Response Status:", response.status);
+      console.log("Response Headers:", [...response.headers.entries()]);
+      const data = await response.json();
+      console.log("Response Data:", data);
+
+      if (data.success || response.status === 200 || response.status === 201) {
+        setFormResult("Form Submitted Successfully! Thank you for your message.");
+        if (formRef.current) {
+          formRef.current.reset(); // Reset the form fields after successful submission
+        }
+      } else {
+        console.error("Error from Web3Forms:", data);
+        setFormResult(data.message || "Something went wrong. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      setFormResult("Something went wrong. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false); // Set submitting state to false
+    }
+
+    setTimeout(() => {
+      setFormResult("");
+    }, 5000);
+  };
+
+  // --- ENDS WEB3FORMS lOGIC ---
 
   const projects = [
         {
@@ -1002,7 +1065,9 @@ function App() {
             >
               <Card className={`${isDark ? "glass-dark border-white/10" : "glass border-black/10"} bg-transparent`}>
                 <CardContent className="p-6">
-                  <form className="space-y-5">
+                  <form onSubmit={handleFormSubmit} className="space-y-5">
+                    <input type="hidden" name="form_name" value="Star Portfolio" />
+                    <input type="hidden" name="subject" value="New Contact Form Submission from Portfolio" />
                     <motion.div
                       className="grid md:grid-cols-2 gap-5"
                       initial={{ opacity: 0, y: 15 }}
@@ -1016,6 +1081,8 @@ function App() {
                         </label>
                         <motion.input
                           type="text"
+                          name="name"
+                          required
                           className={`w-full px-4 py-3 rounded-xl ${isDark ? "glass-dark border-white/10 text-white placeholder-gray-500" : "glass border-black/10 text-gray-900 placeholder-gray-400"} focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300`}
                           placeholder="Your Name"
                           whileFocus={{ scale: 1.01 }}
@@ -1027,6 +1094,8 @@ function App() {
                         </label>
                         <motion.input
                           type="email"
+                          name="email"
+                          required
                           className={`w-full px-4 py-3 rounded-xl ${isDark ? "glass-dark border-white/10 text-white placeholder-gray-500" : "glass border-black/10 text-gray-900 placeholder-gray-400"} focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300`}
                           placeholder="your@email.com"
                           whileFocus={{ scale: 1.01 }}
@@ -1044,6 +1113,8 @@ function App() {
                       </label>
                       <motion.input
                         type="text"
+                        name="subject"
+                        required
                         className={`w-full px-4 py-3 rounded-xl ${isDark ? "glass-dark border-white/10 text-white placeholder-gray-500" : "glass border-black/10 text-gray-900 placeholder-gray-400"} focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300`}
                         placeholder="AI Project Inquiry"
                         whileFocus={{ scale: 1.01 }}
@@ -1060,6 +1131,8 @@ function App() {
                       </label>
                       <motion.textarea
                         rows={5}
+                        name="message"
+                        required
                         className={`w-full px-4 py-3 rounded-xl ${isDark ? "glass-dark border-white/10 text-white placeholder-gray-500" : "glass border-black/10 text-gray-900 placeholder-gray-400"} focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none`}
                         placeholder="Tell me about your AI project or opportunity..."
                         whileFocus={{ scale: 1.01 }}
@@ -1073,12 +1146,61 @@ function App() {
                       viewport={{ once: true }}
                     >
                       <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <Button className="bg-gradient-to-r self-center from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-full text-lg font-medium glow transition-all duration-300 group flex items-center justify-center">
+                        <Button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className={`bg-gradient-to-r self-center from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-full text-lg font-medium glow transition-all duration-300 group flex items-center justify-center ${
+                            isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+                          }`}
+                        >
                           <Zap className="mr-2" size={18} />
-                          Send Message
+                          {isSubmitting ? "Sending..." : "Send Message"}
                         </Button>
                       </motion.div>
                     </motion.div>
+                    {formResult && (
+                      <motion.div
+                        className={`flex items-center justify-center text-sm font-medium pt-2 px-4 py-2 rounded-lg
+                        } ${
+                          formResult.includes("Success") ? "text-green-500" : formResult.includes("Sending") ? "text-blue-400" : "text-red-400"
+                        }`}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.3 }}
+                        role="alert"
+                        aria-live="assertive"
+                      >
+                        {formResult.includes("Success") && (
+                          <motion.div
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <CheckCircle className="mr-1.5" size={18} />
+                          </motion.div>
+                        )}
+                        {formResult.includes("Sending") && (
+                          <motion.div
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <Loader2 className="mr-1.5 animate-spin" size={18} />
+                          </motion.div>
+                        )}
+                        {formResult.includes("wrong") && (
+                          <motion.div
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <AlertCircle className="mr-1.5" size={18} />
+                          </motion.div>
+                        )}
+                        <span>{formResult}</span>
+                      </motion.div>
+                    )}
                   </form>
                 </CardContent>
               </Card>
