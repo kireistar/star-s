@@ -8,10 +8,9 @@ import {
   Github,
   Linkedin,
   Mail,
-  ExternalLink,
+  // ExternalLink,
   Download,
   Terminal,
-  Coffee,
   Heart,
   ArrowUpRight,
   ArrowUp,
@@ -33,6 +32,7 @@ import {
   Target,
   Lightbulb,
   Send,
+  Star,
 } from "lucide-react"
 
 // --- UI COMPONENT STUBS ---
@@ -111,14 +111,15 @@ function Navbar({ isDark, toggleTheme, scrollToSection, isMenuOpen, setIsMenuOpe
               whileTap={{ scale: 0.95 }}
               onClick={() => scrollToSection("home")}
             >
-              <Brain className="mr-2" size={18} />
-              <span className="hidden sm:block">Bintang AI</span>
-              <span className="sm:hidden">BA</span>
+              <Star className="mr-2" size={18} />
+              <span className="hidden sm:block mr-10">Bintang</span>
+              <span className="sm:hidden">Star</span>
+              {/* <BracesIcon className="mr-5" size={18} /> */}
             </motion.div>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center">
-              <div className="flex items-center space-x-1 bg-white/5 rounded-xl p-1">
+            <div className="hidden md:flex items-center justify-center">
+              <div className="flex items-center justify-center space-x-1 bg-white/5 rounded-xl p-1">
                 {navItems.map((item, index) => (
                   <motion.button
                     key={item.name}
@@ -283,8 +284,8 @@ function Footer({ isDark, scrollToSection }: FooterProps) {
 
   const socialLinks = [
     { icon: Github, href: "https://github.com/kireistar", label: "GitHub" },
-    { icon: Linkedin, href: "https://linkedin.com/", label: "LinkedIn" },
-    { icon: Mail, href: "mailto:hello@bintang.ai", label: "Email" },
+    { icon: Linkedin, href: "https://linkedin.com/in/hafidh-bintang-ramadhan-96209728b", label: "LinkedIn" },
+    { icon: Mail, href: "mailto:littlestar0100@gmail.com", label: "Email" },
   ];
 
   return (
@@ -312,7 +313,7 @@ function Footer({ isDark, scrollToSection }: FooterProps) {
               aria-label="Back to Top"
             >
               <Brain className="mr-2 group-hover:rotate-6 transition-transform" size={24} />
-              Bintang AI
+              Bintang
               <ArrowUp size={16} className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity" />
             </motion.button>
             <p className={`${isDark ? "text-gray-400" : "text-gray-600"} mb-6 font-light max-w-lg text-sm leading-relaxed`}>
@@ -393,15 +394,15 @@ function Footer({ isDark, scrollToSection }: FooterProps) {
                 </span>
               </motion.div>
               <motion.div className="flex items-center" whileHover={{ x: 3 }}>
-                <Coffee size={14} className="text-blue-400 mr-2.5" />
+                <Star size={14} className="text-blue-400 mr-2.5" />
                 <span className={`${isDark ? "text-gray-400" : "text-gray-600"} font-light text-sm`}>
-                  Fueled by Indonesian coffee
+                  Fueled by Star
                 </span>
               </motion.div>
               <motion.div className="flex items-center" whileHover={{ x: 3 }}>
                 <Brain size={14} className="text-purple-400 mr-2.5" />
                 <span className={`${isDark ? "text-gray-400" : "text-gray-600"} font-light text-sm`}>
-                  Training models since 2022
+                  AI concentration since 2025
                 </span>
               </motion.div>
             </div>
@@ -417,10 +418,10 @@ function Footer({ isDark, scrollToSection }: FooterProps) {
           viewport={{ once: true }}
         >
           <p className={`${isDark ? "text-gray-400" : "text-gray-600"} font-light text-xs text-center sm:text-left`}>
-            © 2025 Bintang AI. Crafted with <Heart size={12} className="inline text-red-400 mx-0.5" /> and neural networks.
+            © 2025 Bintang. Crafted with <Heart size={12} className="inline text-red-400 mx-0.5" /> and neural networks.
           </p>
           <p className={`${isDark ? "text-gray-500" : "text-gray-500"} text-xs`}>
-            Built with Next.js, Framer Motion & Tailwind CSS
+            Built with React.js, Vite, Framer Motion, & Tailwind CSS
           </p>
         </motion.div>
       </div>
@@ -439,22 +440,22 @@ function App() {
 
   const projects = [
         {
-          title: "Neural Vision System",
+          title: "Group Attendance Management",
           description:
-            "Advanced computer vision platform for real-time object detection and classification. Built with deep learning models achieving high accuracy on custom datasets.",
+            "Advanced computer vision program for real-time face recognition. Built with deep learning models using MTCCNN and facenet, achieving high accuracy on faces detection.",
           image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=300&fit=crop",
-          tech: ["Python", "PyTorch", "OpenCV", "YOLO", "Flask", "Docker"],
+          tech: ["Python", "OpenCV", "MTCNN", "facenet", "Flask", "matplotlib", "Tailwindcss"],
           github: "https://github.com",
           live: "https://demo.com",
           status: "production",
           highlight: "Computer Vision",
         },
         {
-          title: "Indonesian Sentiment Analyzer",
+          title: "Medical Chatbot - HealerAI",
           description:
-            "Natural language processing model specifically trained for Indonesian text sentiment analysis using transformer architecture and BERT models.",
+            "Natural language processing model specifically trained for medical conversations using transformer architecture and BART models.",
           image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop",
-          tech: ["Python", "Transformers", "BERT", "FastAPI", "TensorFlow", "Streamlit"],
+          tech: ["Python", "Transformers", "BART", "Flask", "TensorFlow", "Tailwindcss"],
           github: "https://github.com",
           live: "https://demo.com",
           status: "beta",
@@ -475,16 +476,16 @@ function App() {
 
   const techStack = {
     "AI & Machine Learning": ["Python", "TensorFlow", "PyTorch", "Scikit-learn", "Keras", "OpenCV", "Pandas", "NumPy"],
-    "Web Development": ["React", "Next.js", "Node.js", "Express", "FastAPI", "Flask", "TypeScript", "JavaScript"],
-    "Database & Cloud": ["PostgreSQL", "MongoDB", "Redis", "AWS", "Docker", "Git", "Linux", "Firebase"],
+    "Web Development": ["React", "Node.js", "FastAPI", "Flask", "TypeScript", "JavaScript", "Tailwindcss"],
+    "Database & Cloud": ["PostgreSQL", "Docker", "Git", "Firebase", "MySQL", "Laragon"],
     "Data & Analytics": ["Jupyter", "Matplotlib", "Seaborn", "Plotly", "D3.js", "Tableau", "Power BI", "Excel"],
   };
 
   const hardSkills = [
     { name: "Machine Learning", icon: Brain, description: "Deep Learning, Neural Networks, Model Training" },
     { name: "Data Science", icon: TrendingUp, description: "Statistical Analysis, Data Visualization, Insights" },
-    { name: "Computer Vision", icon: Network, description: "Image Processing, Object Detection, CNN" },
-    { name: "Natural Language Processing", icon: MessageSquare, description: "Text Analysis, Transformers, BERT" },
+    { name: "Computer Vision", icon: Network, description: "Image Processing, Object Detection, CNN, Machine Learning, Deep Learning" },
+    { name: "Natural Language Processing", icon: MessageSquare, description: "Text Analysis, Transformers, BERT, T5, GPT, BART, LSTM" },
     { name: "Web Development", icon: Code, description: "Full-Stack Development, APIs, Responsive Design" },
     { name: "Database Management", icon: Database, description: "SQL, NoSQL, Data Modeling, Optimization" },
   ];
@@ -499,9 +500,9 @@ function App() {
   ];
 
   const achievements = [
-    { title: "AI Research Publication", desc: "Published in IEEE Conference on AI", icon: BookOpen },
-    { title: "Kaggle Competition Expert", desc: "Top 5% in multiple ML competitions", icon: Award },
-    { title: "Google AI Certification", desc: "TensorFlow Developer Certified", icon: Sparkles },
+    { title: "AI Bootcamp", desc: "AI Concentration Since 2025", icon: BookOpen },
+    { title: "Mastering AI on AWS", desc: "AI and Machine Learning Solutions with AWS Services", icon: Award },
+    { title: "AI Engineer Certification", desc: "Master Deep Learning and Transformers", icon: Sparkles },
   ];
 
   const containerVariants = {
@@ -650,8 +651,8 @@ function App() {
 
             <motion.div className="flex justify-center space-x-6 mb-12" variants={itemVariants}>
               {[
-                { icon: Github, href: "https://github.com", label: "github" },
-                { icon: Linkedin, href: "https://linkedin.com", label: "linkedin" },
+                { icon: Github, href: "https://github.com/kireistar", label: "github" },
+                { icon: Linkedin, href: "https://linkedin.com/in/hafidh-bintang-ramadhan-96209728b", label: "linkedin" },
                 { icon: Mail, href: "mailto:hello@bintang.ai", label: "email" },
               ].map((social, index) => (
                 <motion.a
@@ -955,14 +956,14 @@ function App() {
                             </span>
                             ))}
                         </div>
-                        <div className="flex space-x-4 mt-auto">
+                        {/* <div className="flex space-x-4 mt-auto">
                             <motion.a href={project.github} target="_blank" rel="noopener noreferrer" className={`flex items-center ${isDark ? "text-gray-400 hover:text-blue-400" : "text-gray-600 hover:text-blue-600"} transition-colors duration-300 font-medium text-sm`} whileHover={{ scale: 1.05, x: 3 }}>
                                 <Github size={16} className="mr-1.5" /> Source
                             </motion.a>
                             <motion.a href={project.live} target="_blank" rel="noopener noreferrer" className={`flex items-center ${isDark ? "text-gray-400 hover:text-blue-400" : "text-gray-600 hover:text-blue-600"} transition-colors duration-300 font-medium text-sm`} whileHover={{ scale: 1.05, x: 3 }}>
                                 <ExternalLink size={16} className="mr-1.5" /> Demo
                             </motion.a>
-                        </div>
+                        </div> */}
                     </CardContent>
                   </Card>
                 </motion.div>
