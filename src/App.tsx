@@ -696,10 +696,17 @@ function App() {
 
             <motion.div className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-12" variants={itemVariants}>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-full text-lg font-medium glow transition-all duration-300 group flex items-center">
-                  <Download className="mr-2" size={18} />
-                  Download Resume
-                </Button>
+                <a 
+                  href="Stars-CV.pdf"
+                  download="Stars-CV.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-full text-lg font-medium glow transition-all duration-300 group flex items-center">
+                    <Download className="mr-2" size={18} />
+                    Download Resume
+                  </Button>
+                </a>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button
