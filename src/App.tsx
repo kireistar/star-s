@@ -851,7 +851,7 @@ function App() {
             <h2 className="text-4xl md:text-5xl font-bold mb-6 ai-gradient">My Journey in AI</h2>
             <p className={`text-lg ${isDark ? "text-gray-400" : "text-gray-600"} max-w-3xl mx-auto font-light`}>
               Passionate about <br /><span className="highlight">Artificial Intelligence</span>and{" "}
-              <span className="highlight">Machine Learning</span>, building the future with intelligent systems
+              <span className="highlight">Machine Learning</span>, <br />building the future with intelligent systems
             </p>
           </motion.div>
 
