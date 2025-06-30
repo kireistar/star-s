@@ -22,7 +22,7 @@ import {
   Sun,
   Moon,
   Sparkles,
-  TrendingUp,
+  // TrendingUp,
   Award,
   BookOpen,
   Code,
@@ -426,7 +426,7 @@ function Footer({ isDark, scrollToSection, handleCopyEmail, copyStatus }: Footer
                   transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                 />
                 <span className={`${isDark ? "text-gray-400" : "text-gray-600"} font-light text-sm`}>
-                  Open for AI opportunities
+                  Open for job opportunities
                 </span>
               </motion.div>
               <motion.div className="flex items-center" whileHover={{ x: 3 }}>
@@ -483,7 +483,7 @@ function App() {
 
     try {
       await navigator.clipboard.writeText(email);
-      setCopyStatus("Email copied to clipboard!");
+      setCopyStatus("Email copied!");
     } catch (error) {
       console.error("Failed to copy email:", error);
       setCopyStatus("Failed to copy email. Please try again.");
@@ -558,7 +558,7 @@ function App() {
         {
           title: "Group Attendance Management",
           description:
-            "Advanced computer vision program for real-time face recognition. Built with deep learning models using MTCCNN and facenet, achieving high accuracy on faces detection.",
+            "Advanced computer vision program for real-time face recognition. Built with deep learning models using MTCNN and facenet, achieving high accuracy on faces detection.",
           image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=300&fit=crop",
           tech: ["Python", "OpenCV", "MTCNN", "facenet", "Flask", "matplotlib", "Tailwindcss"],
           github: "https://github.com",
@@ -574,32 +574,32 @@ function App() {
           tech: ["Python", "Transformers", "BART", "Flask", "TensorFlow", "Tailwindcss"],
           github: "https://github.com",
           live: "https://demo.com",
-          status: "beta",
+          status: "production",
           highlight: "NLP & AI",
         },
         {
-          title: "Smart Analytics Dashboard",
+          title: "Tumor Detection",
           description:
-            "Machine learning pipeline for predictive analytics with real-time data visualization and business intelligence insights for decision making.",
+            "A computer vision model trained to detect and classify tumor cells from medical imagery. Utilizes a Convolutional Neural Network (CNN) architecture for high-accuracy analysis of MRI and CT scans.",
           image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
-          tech: ["Python", "Scikit-learn", "React", "D3.js", "PostgreSQL", "Redis"],
+          tech: ["Python", "TensorFlow", "Keras", "OpenCV", "Numpy", "Flask", "PHP", "Tailwindcss"],
           github: "https://github.com",
           live: "https://demo.com",
-          status: "development",
-          highlight: "Data Science",
+          status: "production",
+          highlight: "Medical Imaging & CNNs",
         },
       ];
 
   const techStack = {
-    "AI & Machine Learning": ["Python", "TensorFlow", "PyTorch", "Scikit-learn", "Keras", "OpenCV", "Pandas", "NumPy"],
-    "Web Development": ["React", "Node.js", "FastAPI", "Flask", "TypeScript", "JavaScript", "Tailwindcss"],
-    "Database & Cloud": ["PostgreSQL", "Docker", "Git", "Firebase", "MySQL", "Laragon"],
-    "Data & Analytics": ["Jupyter", "Matplotlib", "Seaborn", "Plotly", "D3.js", "Tableau", "Power BI", "Excel"],
+    "AI & Machine Learning": ["Python", "TensorFlow", "PyTorch", "Scikit-learn", "Keras", "OpenCV", "Pandas", "NumPy", "Transformers"],
+    "Web Development": ["React", "Node.js", "FastAPI", "Flask", "TypeScript", "JavaScript", "Tailwindcss", "PHP"],
+    "Mobile Development": ["Dart", "Flutter", "Java"],
+    "Database": ["PostgreSQL", "Docker", "Git", "Firebase", "MySQL", "Laragon"],
   };
 
   const hardSkills = [
     { name: "Machine Learning", icon: Brain, description: "Deep Learning, Neural Networks, Model Training" },
-    { name: "Data Science", icon: TrendingUp, description: "Statistical Analysis, Data Visualization, Insights" },
+    // { name: "", icon: TrendingUp, description: "Statistical Analysis, Data Visualization, Insights" },
     { name: "Computer Vision", icon: Network, description: "Image Processing, Object Detection, CNN, Machine Learning, Deep Learning" },
     { name: "Natural Language Processing", icon: MessageSquare, description: "Text Analysis, Transformers, BERT, T5, GPT, BART, LSTM" },
     { name: "Web Development", icon: Code, description: "Full-Stack Development, APIs, Responsive Design" },
@@ -611,7 +611,7 @@ function App() {
     { name: "Team Collaboration", icon: Users, description: "Effective communication and teamwork" },
     { name: "Project Management", icon: Target, description: "Planning, execution, and delivery" },
     { name: "Continuous Learning", icon: BookOpen, description: "Staying updated with latest technologies" },
-    { name: "Communication", icon: MessageSquare, description: "Technical writing and presentation skills" },
+    { name: "Communication", icon: MessageSquare, description: "Articulating technical details with clarity" },
     { name: "Leadership", icon: Award, description: "Mentoring and guiding team members" },
   ];
 
@@ -740,7 +740,7 @@ function App() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.6 }}
               >
-                Passionate about <span className="highlight">Artificial Intelligence</span> and{" "}
+                Passionate about<span className="highlight">Artificial Intelligence</span>and{" "}
                 <span className="highlight">Machine Learning</span>. Currently building intelligent systems that solve
                 real-world problems and exploring the frontiers of <span className="highlight">Deep Learning</span> and{" "}
                 <span className="highlight">Computer Vision</span>.
@@ -850,7 +850,7 @@ function App() {
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 ai-gradient">My Journey in AI</h2>
             <p className={`text-lg ${isDark ? "text-gray-400" : "text-gray-600"} max-w-3xl mx-auto font-light`}>
-              Passionate about <span className="highlight">Artificial Intelligence</span> and{" "}
+              Passionate about <br /><span className="highlight">Artificial Intelligence</span>and{" "}
               <span className="highlight">Machine Learning</span>, building the future with intelligent systems
             </p>
           </motion.div>
@@ -882,7 +882,7 @@ function App() {
                 <p className={`text-base ${isDark ? "text-gray-300" : "text-gray-700"} leading-relaxed`}>
                   My journey involves building <span className="highlight">neural networks</span>, training{" "}
                   <span className="highlight">ML models</span>, and creating AI-powered applications. I'm particularly
-                  interested in <span className="highlight">Indonesian NLP</span> and{" "}
+                  interested in <span className="highlight">NLP</span> and{" "}
                   <span className="highlight">computer vision</span> applications for Southeast Asian markets.
                 </p>
               </motion.div>
@@ -1125,7 +1125,7 @@ function App() {
               <h2 className="text-4xl md:text-5xl font-bold mb-6 ai-gradient">Let's Collaborate</h2>
               <p className={`text-lg ${isDark ? "text-gray-400" : "text-gray-600"} max-w-3xl mx-auto font-light`}>
                 Ready to build the future with <span className="highlight">AI</span>? Let's discuss{" "}
-                <span className="highlight">machine learning projects</span> and opportunities!
+                <span className="highlight">artificial intelligence projects</span> and the other opportunities!
               </p>
             </motion.div>
 
@@ -1189,7 +1189,7 @@ function App() {
                         name="subject"
                         required
                         className={`w-full px-4 py-3 rounded-xl ${isDark ? "glass-dark border-white/10 text-white placeholder-gray-500" : "glass border-black/10 text-gray-900 placeholder-gray-400"} focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300`}
-                        placeholder="AI Project Inquiry"
+                        placeholder="Project Inquiry"
                         whileFocus={{ scale: 1.01 }}
                       />
                     </motion.div>
@@ -1207,7 +1207,7 @@ function App() {
                         name="message"
                         required
                         className={`w-full px-4 py-3 rounded-xl ${isDark ? "glass-dark border-white/10 text-white placeholder-gray-500" : "glass border-black/10 text-gray-900 placeholder-gray-400"} focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none`}
-                        placeholder="Tell me about your AI project or opportunity..."
+                        placeholder="Tell me about your project or opportunity..."
                         whileFocus={{ scale: 1.01 }}
                       />
                     </motion.div>
