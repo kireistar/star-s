@@ -115,7 +115,7 @@ function Navbar({ isDark, toggleTheme, scrollToSection, isMenuOpen, setIsMenuOpe
               whileTap={{ scale: 0.95 }}
               onClick={() => scrollToSection("home")}
             >
-              <Star className="mr-2" size={18} />
+              <Star className="mr-2 text-purple-600 dark:text-purple-400 [filter:drop-shadow(0_0_3px_theme(colors.purple.500))]" size={18} />
               <span className="hidden sm:block mr-2.5">Star's Profile</span>
               <span className="sm:hidden">Star</span>
               {/* <BracesIcon className="mr-5" size={18} /> */}
@@ -276,9 +276,11 @@ function Navbar({ isDark, toggleTheme, scrollToSection, isMenuOpen, setIsMenuOpe
 interface FooterProps {
   isDark: boolean;
   scrollToSection: (sectionId: string) => void;
+  handleCopyEmail: () => void;
+  copyStatus: string;
 }
 
-function Footer({ isDark, scrollToSection }: FooterProps) {
+function Footer({ isDark, scrollToSection, handleCopyEmail, copyStatus }: FooterProps) {
   const navItems = [
     { name: "home", label: "Home" },
     { name: "about", label: "About" },
@@ -289,7 +291,7 @@ function Footer({ isDark, scrollToSection }: FooterProps) {
   const socialLinks = [
     { icon: Github, href: "https://github.com/kireistar", label: "GitHub" },
     { icon: Linkedin, href: "https://linkedin.com/in/hafidh-bintang-ramadhan-96209728b", label: "LinkedIn" },
-    { icon: Mail, href: "mailto:littlestar0100@gmail.com", label: "Email" },
+    { icon: Mail, label: "Email" },
   ];
 
   return (
@@ -316,7 +318,7 @@ function Footer({ isDark, scrollToSection }: FooterProps) {
               whileHover={{ scale: 1.05 }}
               aria-label="Back to Top"
             >
-              <StarHalf className="mr-2 group-hover:rotate-6 transition-transform" size={24} />
+              <StarHalf className="mr-2 text-purple-600 dark:text-purple-400 [filter:drop-shadow(0_0_4px_theme(colors.purple.500))] group-hover:rotate-6 transition-transform" size={24} />
               Bintang
               <ArrowUp size={16} className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity" />
             </motion.button>
@@ -324,29 +326,59 @@ function Footer({ isDark, scrollToSection }: FooterProps) {
               Building the future with <span className="highlight">Artificial Intelligence</span>. Passionate about
               creating intelligent systems that matter for Indonesia and beyond.
             </p>
-            <div className="flex space-x-3">
-              {socialLinks.map((social, index) => (
-                <motion.a
-                  key={index}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`p-2.5 rounded-xl ${isDark ? "bg-white/5 hover:bg-white/10" : "bg-black/5 hover:bg-black/10"} transition-all duration-300 group`}
-                  aria-label={social.label}
-                  whileHover={{ scale: 1.1, y: -3 }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                >
-                  <social.icon
-                    size={16}
-                    className={`${isDark ? "text-gray-300 group-hover:text-white" : "text-gray-700 group-hover:text-black"} transition-colors duration-300`}
-                  />
-                </motion.a>
-              ))}
+            <div className="flex items-center gap-4">
+              <div className="flex space-x-3">
+                {socialLinks.map((social, index) => {
+                    // 3. We check if the icon is the Email icon
+                    if (social.label === "Email") {
+                      return (
+                        // If it is, we render a button that calls our new function
+                        <motion.button
+                          key={index}
+                          onClick={handleCopyEmail}
+                          className={`p-2.5 rounded-xl ${isDark ? "bg-white/5 hover:bg-white/10" : "bg-black/5 hover:bg-black/10"} transition-all duration-300 group`}
+                          aria-label="Copy Email Address"
+                          whileHover={{ scale: 1.1, y: -3 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <Mail size={16} className={`${isDark ? "text-gray-300 group-hover:text-white" : "text-gray-700 group-hover:text-black"} transition-colors duration-300`} />
+                        </motion.button>
+                      );
+                    } else {
+                      // Otherwise, we render the normal link
+                      return (
+                        <motion.a
+                          key={index}
+                          href={social.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`p-2.5 rounded-xl ${isDark ? "bg-white/5 hover:bg-white/10" : "bg-black/5 hover:bg-black/10"} transition-all duration-300 group`}
+                          aria-label={social.label}
+                          whileHover={{ scale: 1.1, y: -3 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <social.icon size={16} className={`${isDark ? "text-gray-300 group-hover:text-white" : "text-gray-700 group-hover:text-black"} transition-colors duration-300`} />
+                        </motion.a>
+                      );
+                    }
+                  })}
+              </div>
             </div>
+            
+            {/* 4. We add a new element to display the "Copied!" message */}
+              <AnimatePresence>
+                {copyStatus && (
+                  <motion.p
+                    className="text-xs font-medium text-blue-400"
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -5 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {copyStatus}
+                  </motion.p>
+                )}
+              </AnimatePresence>
           </motion.div>
 
           {/* Navigation */}
@@ -389,7 +421,7 @@ function Footer({ isDark, scrollToSection }: FooterProps) {
             <div className="space-y-3">
               <motion.div className="flex items-center" whileHover={{ x: 3 }}>
                 <motion.div
-                  className="w-2 h-2 bg-green-400 rounded-full mr-2.5 shadow-[0_0_8px_0px_#4ade80]"
+                  className="w-2 h-2 ml-0.5 bg-green-400 rounded-full mr-3 shadow-[0_0_8px_0px_#4ade80]"
                   animate={{ scale: [1, 1.25, 1] }}
                   transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                 />
@@ -398,13 +430,13 @@ function Footer({ isDark, scrollToSection }: FooterProps) {
                 </span>
               </motion.div>
               <motion.div className="flex items-center" whileHover={{ x: 3 }}>
-                <Star size={14} className="text-blue-400 mr-2.5" />
+                <Star size={14} className="text-blue-600 dark:text-blue-400 mr-2.5" />
                 <span className={`${isDark ? "text-gray-400" : "text-gray-600"} font-light text-sm`}>
                   Fueled by Star
                 </span>
               </motion.div>
               <motion.div className="flex items-center" whileHover={{ x: 3 }}>
-                <Brain size={14} className="text-purple-400 mr-2.5" />
+                <Brain size={14} className="text-purple-600 dark:text-purple-400 mr-2.5" />
                 <span className={`${isDark ? "text-gray-400" : "text-gray-600"} font-light text-sm`}>
                   AI concentration since 2025
                 </span>
@@ -441,6 +473,27 @@ function App() {
   const { isDark, toggleTheme } = useTheme();
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+
+  // Add a state to hold our "Copied!" message
+  const [copyStatus, setCopyStatus] = useState("");
+
+  // Function to handle email copy
+  const handleCopyEmail = async () => {
+    const email = "littlestar0100@gmail.com";
+
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopyStatus("Email copied to clipboard!");
+    } catch (error) {
+      console.error("Failed to copy email:", error);
+      setCopyStatus("Failed to copy email. Please try again.");
+    }
+
+    // The message will disappear after 3 seconds
+    setTimeout(() => {
+      setCopyStatus("");
+    }, 3000);
+  };
 
   // --- WEB3FORMS lOGIC ---
 
@@ -719,30 +772,43 @@ function App() {
               </motion.div>
             </motion.div>
 
-            <motion.div className="flex justify-center space-x-6 mb-12" variants={itemVariants}>
-              {[
-                { icon: Github, href: "https://github.com/kireistar", label: "github" },
-                { icon: Linkedin, href: "https://linkedin.com/in/hafidh-bintang-ramadhan-96209728b", label: "linkedin" },
-                { icon: Mail, href: "mailto:hello@bintang.ai", label: "email" },
-              ].map((social, index) => (
-                <motion.a
-                  key={index}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`group p-3 rounded-full ${isDark ? "glass-dark hover:glass" : "glass hover:bg-white/80"} transition-all duration-300 glow`}
-                  whileHover={{ scale: 1.1, y: -3 }}
-                  whileTap={{ scale: 0.9 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.7 + index * 0.1 }}
-                >
-                  <social.icon
-                    size={20}
-                    className={`text-blue-400 group-hover:${isDark ? "text-white" : "text-blue-600"} transition-colors duration-300`}
-                  />
-                </motion.a>
-              ))}
+            <motion.div className="relative mb-12" variants={itemVariants}>
+              <div className="flex justify-center space-x-6">
+                {[
+                  { icon: Github, href: "https://github.com/kireistar", label: "github" },
+                  { icon: Linkedin, href: "https://linkedin.com/in/hafidh-bintang-ramadhan-96209728b", label: "linkedin" },
+                  { icon: Mail, label: "email" },
+                ].map((social, index) => {
+                  if (social.label === "email") {
+                    return (
+                      <motion.button key={index} onClick={handleCopyEmail} className={`group p-3 rounded-full ${isDark ? "glass-dark hover:glass" : "glass hover:bg-white/80"} transition-all duration-300 glow`} whileHover={{ scale: 1.1, y: -3 }} whileTap={{ scale: 0.9 }}>
+                        <Mail size={20} className={`text-blue-400 group-hover:${isDark ? "text-white" : "text-blue-600"} transition-colors duration-300`} />
+                      </motion.button>
+                    )
+                  } else {
+                    return (
+                      <motion.a key={index} href={social.href} target="_blank" rel="noopener noreferrer" className={`group p-3 rounded-full ${isDark ? "glass-dark hover:glass" : "glass hover:bg-white/80"} transition-all duration-300 glow`} whileHover={{ scale: 1.1, y: -3 }} whileTap={{ scale: 0.9 }}>
+                        <social.icon size={20} className={`text-blue-400 group-hover:${isDark ? "text-white" : "text-blue-600"} transition-colors duration-300`} />
+                      </motion.a>
+                    )
+                  }
+                })}
+              </div>
+               <AnimatePresence>
+                {copyStatus && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.3 }}
+                      className="absolute left-1/2 -translate-x-1/2 mt-3" // Positions it below the icons
+                    >
+                      <div className="text-xs font-medium text-blue-700 dark:text-blue-400 px-3 py-1.5 rounded-full">
+                        {copyStatus}
+                      </div>
+                    </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
 
             <motion.div
@@ -1215,9 +1281,12 @@ function App() {
           </div>
         </section>
       </main>
-      
-      {/* RENDER THE REFACTORED FOOTER */}
-      <Footer isDark={isDark} scrollToSection={scrollToSection} />
+      <Footer
+        isDark={isDark}
+        scrollToSection={scrollToSection}
+        handleCopyEmail={handleCopyEmail}
+        copyStatus={copyStatus}
+      />
     </div>
   );
 }
