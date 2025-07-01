@@ -750,8 +750,8 @@ function App() {
             <motion.div className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-12" variants={itemVariants}>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <a 
-                  href="Stars-CV.pdf"
-                  download="Stars-CV.pdf"
+                  href="Bintang-Ramadhan-Resume.pdf"
+                  download="Bintang-Ramadhan-Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
