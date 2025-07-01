@@ -369,7 +369,7 @@ function Footer({ isDark, scrollToSection, handleCopyEmail, copyStatus }: Footer
               <AnimatePresence>
                 {copyStatus && (
                   <motion.p
-                    className="text-xs font-medium text-blue-400"
+                    className="text-xs font-medium text-blue-700 dark:text-blue-400 px-3 py-1.5 rounded-full"
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -5 }}
