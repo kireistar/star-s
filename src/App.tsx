@@ -559,7 +559,7 @@ function App() {
           title: "Group Attendance Management",
           description:
             "Advanced computer vision program for real-time face recognition. Built with deep learning models using MTCNN and facenet, achieving high accuracy on faces detection.",
-          image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=300&fit=crop",
+          image: "/projects/group-attendance.jpg",
           tech: ["Python", "OpenCV", "MTCNN", "facenet", "Flask", "matplotlib", "Tailwindcss"],
           github: "https://github.com",
           live: "https://demo.com",
@@ -570,7 +570,7 @@ function App() {
           title: "Medical Chatbot - HealerAI",
           description:
             "Natural language processing model specifically trained for medical conversations using transformer architecture and BART models.",
-          image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop",
+          image: "/projects/healer-ai.png",
           tech: ["Python", "Transformers", "BART", "Flask", "TensorFlow", "Tailwindcss"],
           github: "https://github.com",
           live: "https://demo.com",
@@ -581,12 +581,12 @@ function App() {
           title: "Tumor Detection",
           description:
             "A computer vision model trained to detect and classify tumor cells from medical imagery. Utilizes a Convolutional Neural Network (CNN) architecture for high-accuracy analysis of MRI and CT scans.",
-          image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+          image: "/projects/tumor-detection.png",
           tech: ["Python", "TensorFlow", "Keras", "OpenCV", "Numpy", "Flask", "PHP", "Tailwindcss"],
           github: "https://github.com",
           live: "https://demo.com",
           status: "production",
-          highlight: "Medical Imaging & CNNs",
+          highlight: "CNNs",
         },
       ];
 
