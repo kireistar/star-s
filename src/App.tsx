@@ -63,7 +63,7 @@ const CardContent = ({ className, children, ...props }: React.ComponentProps<"di
 // Simple stub for useTheme hook.
 // Replace with your actual theme hook logic.
 const useTheme = () => {
-  const [isDark, setIsDark] = useState(true); // Default to dark theme
+  const [isDark, setIsDark] = useState(false); // Default to dark theme
   
   // Effect to apply the theme class to the body
   useEffect(() => {
@@ -322,7 +322,7 @@ function Footer({ isDark, scrollToSection, handleCopyEmail, copyStatus }: Footer
               Bintang
               <ArrowUp size={16} className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity" />
             </motion.button>
-            <p className={`${isDark ? "text-gray-400" : "text-gray-600"} mb-6 font-light max-w-lg text-sm leading-relaxed`}>
+            <p className={`${isDark ? "text-gray-300" : "text-gray-600"} mb-6 font-light max-w-lg text-sm leading-relaxed`}>
               Building the future with <span className="highlight">Artificial Intelligence</span>. Passionate about
               creating intelligent systems that matter for Indonesia and beyond.
             </p>
@@ -400,7 +400,7 @@ function Footer({ isDark, scrollToSection, handleCopyEmail, copyStatus }: Footer
                 >
                   <motion.button
                     onClick={() => scrollToSection(item.name)}
-                    className={`${isDark ? "text-gray-400 hover:text-blue-400" : "text-gray-600 hover:text-blue-600"} transition-colors duration-300 font-light text-sm`}
+                    className={`${isDark ? "text-gray-300 hover:text-blue-400" : "text-gray-600 hover:text-blue-600"} transition-colors duration-300 font-light text-sm`}
                     whileHover={{ x: 4 }}
                   >
                     {item.label}
@@ -425,19 +425,19 @@ function Footer({ isDark, scrollToSection, handleCopyEmail, copyStatus }: Footer
                   animate={{ scale: [1, 1.25, 1] }}
                   transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                 />
-                <span className={`${isDark ? "text-gray-400" : "text-gray-600"} font-light text-sm`}>
+                <span className={`${isDark ? "text-gray-300" : "text-gray-600"} font-light text-sm`}>
                   Open for job opportunities
                 </span>
               </motion.div>
               <motion.div className="flex items-center" whileHover={{ x: 3 }}>
                 <Star size={14} className="text-blue-600 dark:text-blue-400 mr-2.5" />
-                <span className={`${isDark ? "text-gray-400" : "text-gray-600"} font-light text-sm`}>
+                <span className={`${isDark ? "text-gray-300" : "text-gray-600"} font-light text-sm`}>
                   Fueled by Star
                 </span>
               </motion.div>
               <motion.div className="flex items-center" whileHover={{ x: 3 }}>
                 <Brain size={14} className="text-purple-600 dark:text-purple-400 mr-2.5" />
-                <span className={`${isDark ? "text-gray-400" : "text-gray-600"} font-light text-sm`}>
+                <span className={`${isDark ? "text-gray-300" : "text-gray-600"} font-light text-sm`}>
                   AI concentration since 2025
                 </span>
               </motion.div>
@@ -735,7 +735,7 @@ function App() {
               </motion.h1>
 
               <motion.div
-                className={`text-lg md:text-xl ${isDark ? "text-gray-400" : "text-gray-600"} max-w-3xl mx-auto font-light leading-relaxed`}
+                className={`text-lg md:text-xl ${isDark ? "text-gray-300" : "text-gray-600"} max-w-3xl mx-auto font-light leading-relaxed`}
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.6 }}
@@ -827,7 +827,7 @@ function App() {
                 >
                   <achievement.icon className="text-blue-400 mb-2 mx-auto" size={20} />
                   <h4 className="font-semibold text-sm">{achievement.title}</h4>
-                  <p className={`text-xs ${isDark ? "text-gray-400" : "text-gray-600"}`}>{achievement.desc}</p>
+                  <p className={`text-xs ${isDark ? "text-gray-300" : "text-gray-600"}`}>{achievement.desc}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -849,7 +849,7 @@ function App() {
               About Me
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 ai-gradient">My Journey in AI</h2>
-            <p className={`text-lg ${isDark ? "text-gray-400" : "text-gray-600"} max-w-3xl mx-auto font-light`}>
+            <p className={`text-lg ${isDark ? "text-gray-300" : "text-gray-600"} max-w-3xl mx-auto font-light`}>
               Passionate about <span className="highlight">Artificial Intelligence</span>and{" "}
               <span className="highlight">Machine Learning</span>, building the future with intelligent systems
             </p>
@@ -963,7 +963,7 @@ function App() {
                         <h4 className={`font-semibold ${isDark ? "text-white" : "text-gray-900"} text-sm`}>
                           {skill.name}
                         </h4>
-                        <p className={`text-xs ${isDark ? "text-gray-400" : "text-gray-600"}`}>{skill.description}</p>
+                        <p className={`text-xs ${isDark ? "text-gray-300" : "text-gray-600"}`}>{skill.description}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -1000,7 +1000,7 @@ function App() {
                         <h5 className={`font-medium ${isDark ? "text-white" : "text-gray-900"} text-xs`}>
                           {skill.name}
                         </h5>
-                        <p className={`text-xs ${isDark ? "text-gray-400" : "text-gray-600"} leading-tight`}>
+                        <p className={`text-xs ${isDark ? "text-gray-300" : "text-gray-600"} leading-tight`}>
                           {skill.description}
                         </p>
                       </div>
@@ -1028,7 +1028,7 @@ function App() {
                 Featured Projects
               </div>
               <h2 className="text-4xl md:text-5xl font-bold mb-6 ai-gradient">AI & ML Projects</h2>
-              <p className={`text-lg ${isDark ? "text-gray-400" : "text-gray-600"} max-w-3xl mx-auto font-light`}>
+              <p className={`text-lg ${isDark ? "text-gray-300" : "text-gray-600"} max-w-3xl mx-auto font-light`}>
                 A collection of <span className="highlight">AI & ML projects</span> demonstrating expertise in intelligent
                 system development
               </p>
@@ -1082,7 +1082,7 @@ function App() {
                         <h3 className={`text-lg font-bold mb-2 ${isDark ? "text-white" : "text-gray-900"}`}>
                             {project.title}
                         </h3>
-                        <p className={`${isDark ? "text-gray-400" : "text-gray-600"} mb-4 font-light text-sm leading-relaxed flex-grow`}>
+                        <p className={`${isDark ? "text-gray-300" : "text-gray-600"} mb-4 font-light text-sm leading-relaxed flex-grow`}>
                             {project.description}
                         </p>
                         <div className="flex flex-wrap gap-1.5 mb-4">
@@ -1123,7 +1123,7 @@ function App() {
                 Get In Touch
               </div>
               <h2 className="text-4xl md:text-5xl font-bold mb-6 ai-gradient">Let's Collaborate</h2>
-              <p className={`text-lg ${isDark ? "text-gray-400" : "text-gray-600"} max-w-3xl mx-auto font-light`}>
+              <p className={`text-lg ${isDark ? "text-gray-300" : "text-gray-600"} max-w-3xl mx-auto font-light`}>
                 Ready to build the future with <span className="highlight">AI</span>? Let's discuss{" "}
                 <span className="highlight">artificial intelligence projects</span> and the other opportunities!
               </p>
