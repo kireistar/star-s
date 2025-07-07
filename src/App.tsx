@@ -1141,7 +1141,6 @@ function App() {
                 <CardContent className="p-6">
                   <form ref={formRef} onSubmit={handleFormSubmit} className="space-y-5">
                     <input type="hidden" name="Form_Name" value="Star Portfolio" />
-                    <input type="hidden" name="subject" value="New Contact Form Submission from Portfolio" />
                     <motion.div
                       className="grid md:grid-cols-2 gap-5"
                       initial={{ opacity: 0, y: 15 }}
@@ -1155,7 +1154,7 @@ function App() {
                         </label>
                         <motion.input
                           type="text"
-                          name="name"
+                          name="from_name"
                           required
                           className={`w-full px-4 py-3 rounded-xl ${isDark ? "glass-dark border-white/10 text-white placeholder-gray-500" : "glass border-black/10 text-gray-900 placeholder-gray-400"} focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300`}
                           placeholder="Your Name"
@@ -1168,7 +1167,7 @@ function App() {
                         </label>
                         <motion.input
                           type="email"
-                          name="email"
+                          name="from_email"
                           required
                           className={`w-full px-4 py-3 rounded-xl ${isDark ? "glass-dark border-white/10 text-white placeholder-gray-500" : "glass border-black/10 text-gray-900 placeholder-gray-400"} focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300`}
                           placeholder="your@email.com"
