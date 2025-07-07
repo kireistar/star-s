@@ -39,6 +39,9 @@ import {
   StarHalf,
 } from "lucide-react"
 
+import emailjs from "@emailjs/browser";
+import ReCAPTCHA from "react-google-recaptcha";
+
 // --- UI COMPONENT STUBS ---
 // Simple stubs for Button and Card to make the component self-contained.
 // Replace these with your actual component library imports (e.g., from ./components/ui/button).
@@ -495,64 +498,62 @@ function App() {
     }, 3000);
   };
 
-  // --- WEB3FORMS lOGIC ---
+  // --- EMAILJS lOGIC ---
 
   // This state will hold the message for the user
   const [formResult, setFormResult] = useState("");
-
   const [isSubmitting, setIsSubmitting] = useState(false); // State to track if the form is being submitted
   const formRef = useRef<HTMLFormElement>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   // Sending insturctions to the user
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setFormResult("Sending your message...");
-    setIsSubmitting(true); // Set submitting state to true
-    const formData = new FormData(event.currentTarget);
 
-    formData.append("access_key", "21a2fca1-e3b2-40d1-b6e1-243a5a9405cb");
-
-    const object = Object.fromEntries(formData);
-    const json = JSON.stringify(object);
-
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: json,
-      });
-
-      // Log the full response for debugging
-      console.log("Response Status:", response.status);
-      console.log("Response Headers:", [...response.headers.entries()]);
-      const data = await response.json();
-      console.log("Response Data:", data);
-
-      if (data.success || response.status === 200 || response.status === 201) {
-        setFormResult("Form Submitted Successfully! Thank you for your message.");
-        if (formRef.current) {
-          formRef.current.reset(); // Reset the form fields after successful submission
-        }
-      } else {
-        console.error("Error from Web3Forms:", data);
-        setFormResult(data.message || "Something went wrong. Please try again later.");
-      }
-    } catch (error) {
-      console.error("Submission error:", error);
-      setFormResult("Something went wrong. Please check your connection and try again.");
-    } finally {
-      setIsSubmitting(false); // Set submitting state to false
+    // 1. Get the reCAPTCHA value from the component
+    const captchaValue = recaptchaRef.current?.getValue();
+    if (!captchaValue) {
+      setFormResult("Please complete the CAPTCHA first.");
+      setTimeout(() => setFormResult(""), 4000);
+      return;
     }
 
-    setTimeout(() => {
-      setFormResult("");
-    }, 5000);
+    // Check if form ref exists
+    if (!formRef.current) {
+      console.error("Form reference is not available.");
+      return;
+    }
+
+    setIsSubmitting(true); // Set submitting state to true
+    setFormResult("Sending your message...");
+
+    // 2. Send the form data directly using EmailJS
+    // EmailJS will automatically handle the reCAPTCHA verification on their server
+    emailjs.sendForm(
+        'service_dz2imxl',    // Your Service ID from EmailJS
+        'template_p9vr167',   // Your Template ID from EmailJS
+        formRef.current,
+        'n2o4i6L7UPLG_l7yU'     // Your Public Key from EmailJS
+    )
+    .then(
+        (result) => {
+            console.log('SUCCESS!', result.text);
+            setFormResult("Message Sent Successfully!");
+            formRef.current?.reset();
+            recaptchaRef.current?.reset(); // Reset the reCAPTCHA widget
+        },
+        (error) => {
+            console.log('FAILED...', error.text);
+            setFormResult("Failed to send message. Please try again.");
+        }
+    )
+    .finally(() => {
+      setIsSubmitting(false);
+      setTimeout(() => setFormResult(""), 5000);
+    });
   };
 
-  // --- ENDS WEB3FORMS lOGIC ---
+  // --- ENDS EMAILJS lOGIC ---
 
   const projects = [
         {
@@ -1138,8 +1139,8 @@ function App() {
             >
               <Card className={`${isDark ? "glass-dark border-white/10" : "glass border-black/10"} bg-transparent`}>
                 <CardContent className="p-6">
-                  <form onSubmit={handleFormSubmit} className="space-y-5">
-                    <input type="hidden" name="form_name" value="Star Portfolio" />
+                  <form ref={formRef} onSubmit={handleFormSubmit} className="space-y-5">
+                    <input type="hidden" name="Form_Name" value="Star Portfolio" />
                     <input type="hidden" name="subject" value="New Contact Form Submission from Portfolio" />
                     <motion.div
                       className="grid md:grid-cols-2 gap-5"
@@ -1212,10 +1213,27 @@ function App() {
                       />
                     </motion.div>
                     <motion.div
-                      className="flex items-center justify-center"
+                      className="flex justify-center"
                       initial={{ opacity: 0, y: 15 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: 0.5 }}
+                      viewport={{ once: true }}
+                    >
+                      <div className="scale-90 origin-center md:scale-100 md:origin-center">
+                        <ReCAPTCHA
+                          ref={recaptchaRef}
+                          sitekey="6LdNcHorAAAAALFLizeFtKdFOdOjdGi7NAqLmPbu"
+                          theme={isDark ? "dark" : "light"}
+                        />
+                      </div>
+                    </motion.div>
+
+                    {/* Bagian untuk Tombol Kirim */}
+                    <motion.div
+                      className="flex items-center justify-center"
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.6 }}
                       viewport={{ once: true }}
                     >
                       <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
