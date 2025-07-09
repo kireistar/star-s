@@ -717,7 +717,7 @@ function App() {
 
             <motion.div className="space-y-6 mb-12" variants={itemVariants}>
               <motion.div
-                className="text-sm text-blue-400 font-medium tracking-wider uppercase flex items-center justify-center"
+                className="text-sm text-blue-500 font-medium tracking-wider uppercase flex items-center justify-center"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
@@ -845,7 +845,7 @@ function App() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="text-sm text-blue-400 font-medium tracking-wider uppercase mb-4 flex items-center justify-center">
+            <div className="text-sm text-blue-500 font-medium tracking-wider uppercase mb-4 flex items-center justify-center">
               <Network className="mr-2" size={16} />
               About Me
             </div>
@@ -869,7 +869,7 @@ function App() {
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="text-sm text-blue-400 mb-4 font-medium flex items-center">
+                <div className="text-sm text-blue-500 mb-4 font-medium flex items-center">
                   <Bot className="mr-2" size={16} />
                   My Story
                 </div>
@@ -894,7 +894,7 @@ function App() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <div className="text-sm text-blue-400 mb-4 font-medium flex items-center">
+                <div className="text-sm text-blue-500 mb-4 font-medium flex items-center">
                   <Code className="mr-2" size={16} />
                   Tech Stack & Tools
                 </div>
@@ -942,7 +942,7 @@ function App() {
                 className={`${isDark ? "glass-dark" : "glass"} rounded-2xl p-6 border ${isDark ? "border-white/10" : "border-black/10"}`}
                 whileHover={{ scale: 1.02 }}
               >
-                <div className="text-sm text-blue-400 mb-4 font-medium flex items-center">
+                <div className="text-sm text-blue-500 mb-4 font-medium flex items-center">
                   <Brain className="mr-2" size={16} />
                   Technical Skills
                 </div>
@@ -979,7 +979,7 @@ function App() {
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.02 }}
               >
-                <div className="text-sm text-blue-400 mb-4 font-medium flex items-center">
+                <div className="text-sm text-blue-500 mb-4 font-medium flex items-center">
                   <Users className="mr-2" size={16} />
                   Soft Skills
                 </div>
@@ -1024,7 +1024,7 @@ function App() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <div className="text-sm text-blue-400 font-medium tracking-wider uppercase mb-4 flex items-center justify-center">
+              <div className="text-sm text-blue-500 font-medium tracking-wider uppercase mb-4 flex items-center justify-center">
                 <Sparkles className="mr-2" size={16} />
                 Featured Projects
               </div>
@@ -1119,7 +1119,7 @@ function App() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <div className="text-sm text-blue-400 font-medium tracking-wider uppercase mb-4 flex items-center justify-center">
+              <div className="text-sm text-blue-500 font-medium tracking-wider uppercase mb-4 flex items-center justify-center">
                 <Terminal className="mr-2" size={16} />
                 Get In Touch
               </div>
