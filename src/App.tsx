@@ -332,10 +332,10 @@ function Footer({ isDark, scrollToSection, handleCopyEmail, copyStatus }: Footer
             <div className="flex items-center gap-4">
               <div className="flex space-x-3">
                 {socialLinks.map((social, index) => {
-                    // 3. We check if the icon is the Email icon
+                    // Check if the icon is the Email icon
                     if (social.label === "Email") {
                       return (
-                        // If it is, we render a button that calls our new function
+                        // If it is, render a button that calls our new function
                         <motion.button
                           key={index}
                           onClick={handleCopyEmail}
@@ -348,7 +348,7 @@ function Footer({ isDark, scrollToSection, handleCopyEmail, copyStatus }: Footer
                         </motion.button>
                       );
                     } else {
-                      // Otherwise, we render the normal link
+                      // Otherwise, render the normal link
                       return (
                         <motion.a
                           key={index}
@@ -368,7 +368,7 @@ function Footer({ isDark, scrollToSection, handleCopyEmail, copyStatus }: Footer
               </div>
             </div>
             
-            {/* 4. We add a new element to display the "Copied!" message */}
+            {/* Add a new element to display the "Copied!" message */}
               <AnimatePresence>
                 {copyStatus && (
                   <motion.p
@@ -482,7 +482,7 @@ function App() {
 
   // Function to handle email copy
   const handleCopyEmail = async () => {
-    const email = "littlestar0100@gmail.com";
+    const email = "bintangrdn.works@gmail.com";
 
     try {
       await navigator.clipboard.writeText(email);
@@ -510,7 +510,7 @@ function App() {
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // 1. Get the reCAPTCHA value from the component
+    // Get the reCAPTCHA value from the component
     const captchaValue = recaptchaRef.current?.getValue();
     if (!captchaValue) {
       setFormResult("Please complete the CAPTCHA first.");
@@ -527,7 +527,7 @@ function App() {
     setIsSubmitting(true); // Set submitting state to true
     setFormResult("Sending your message...");
 
-    // 2. Send the form data directly using EmailJS
+    // Send the form data directly using EmailJS
     // EmailJS will automatically handle the reCAPTCHA verification on their server
     emailjs.sendForm(
         'service_dz2imxl',    // Your Service ID from EmailJS
@@ -557,7 +557,7 @@ function App() {
 
   const projects = [
         {
-          title: "Group Attendance Management",
+          title: "Group Attendance System",
           description:
             "Advanced computer vision program for real-time face recognition. Built with deep learning models using MTCNN and facenet, achieving high accuracy on faces detection.",
           image: "/projects/group-attendance.jpg",
@@ -751,8 +751,8 @@ function App() {
             <motion.div className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-12" variants={itemVariants}>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <a 
-                  href="Bintang-Ramadhan-Resume.pdf"
-                  download="Bintang-Ramadhan-Resume.pdf"
+                  href="Hafidh_Bintang_Ramadhan_CV.pdf"
+                  download="Hafidh_Bintang_Ramadhan_CV.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
